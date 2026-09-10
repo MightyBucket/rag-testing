@@ -6,3 +6,4 @@ streamlit
 python-dotenv
 faiss-cpu
 sentence-transformers
+pytest
