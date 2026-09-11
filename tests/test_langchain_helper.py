@@ -9,7 +9,7 @@ import pytest
 
 @pytest.fixture(scope="module")
 def helper_module():
-    """Import the repository helper under patched LLM/embedding constructors."""
+    """Import the Langchain_helper module, but only include mock modules for simple unit testing."""
     os.environ.setdefault("GOOGLE_API_KEY", "test-key")
 
     # Patch the classes that are instantiated when Langchain_helper is imported.
@@ -19,7 +19,7 @@ def helper_module():
         mock_llm_cls.return_value = Mock(name="MockLLM")
         mock_embedding_cls.return_value = Mock(name="MockEmbedding")
 
-        # Ensure a clean import for deterministic test behavior.
+        # Import Langchain module (but remove existing instances first to avoid conflicts)
         sys.modules.pop("Langchain_helper", None)
         module = importlib.import_module("Langchain_helper")
         return module

@@ -8,7 +8,7 @@ import pytest
 
 @pytest.fixture(scope="module")
 def helper_module():
-    """Import the repository helper with the external clients replaced by mocks."""
+    """Import the Langchain_helper module, but only include mock modules for simple query testing."""
     os.environ.setdefault("GOOGLE_API_KEY", "test-key")
 
     with patch("langchain_google_genai.ChatGoogleGenerativeAI") as mock_llm_cls, \
@@ -17,6 +17,7 @@ def helper_module():
         mock_llm_cls.return_value = Mock(name="MockLLM")
         mock_embedding_cls.return_value = Mock(name="MockEmbedding")
 
+        # Import Langchain module (but remove existing instances first to avoid conflicts)
         sys.modules.pop("Langchain_helper", None)
         module = importlib.import_module("Langchain_helper")
         return module
@@ -41,8 +42,8 @@ def test_query_returns_empty_list_when_no_documents_match(helper_module):
     )
 
 
-def test_query_returns_top_k_documents_from_faiss(helper_module):
-    """A query should return the top-k documents when the FAISS mock is populated."""
+def test_query_returns_top_5_documents_from_faiss(helper_module):
+    """A query should return the top 5 documents when the FAISS mock is populated."""
     fake_docs = [
         Mock(page_content=f"Restaurant {index}", metadata={"knowledge_source": "tiktok"})
         for index in range(5)

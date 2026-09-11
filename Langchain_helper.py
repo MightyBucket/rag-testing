@@ -35,7 +35,7 @@ if not google_api_key:
 
 
 # ---------------------------------------------------------
-# Configuration
+# Configuration / File Paths
 # ---------------------------------------------------------
 
 BASE_DIR = os.path.dirname(
