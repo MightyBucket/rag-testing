@@ -5,7 +5,7 @@ import sys
 import pytest
 
 
-@pytest.mark.integration
+@pytest.mark.functional
 def test_real_query_smoke():
     """Do a basic query with Google Gemini and check that a response is received."""
 

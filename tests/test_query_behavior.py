@@ -44,6 +44,8 @@ def test_query_returns_empty_list_when_no_documents_match(helper_module):
 
 def test_query_returns_top_5_documents_from_faiss(helper_module):
     """A query should return the top 5 documents when the FAISS mock is populated."""
+
+    # Generate a very basic list of restaurants and vectorise it
     fake_docs = [
         Mock(page_content=f"Restaurant {index}", metadata={"knowledge_source": "tiktok"})
         for index in range(5)
@@ -58,6 +60,7 @@ def test_query_returns_top_5_documents_from_faiss(helper_module):
                 k=5,
             )
 
+    # Make sure those restaurants appear in that list
     assert len(docs) == 5
     assert [doc.page_content for doc in docs] == [
         "Restaurant 0",
