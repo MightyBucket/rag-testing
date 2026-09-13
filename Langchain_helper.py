@@ -42,10 +42,13 @@ BASE_DIR = os.path.dirname(
     os.path.abspath(__file__)
 )
 
+CSV_DIR = "csv"
+
 
 # TikTok / restaurant CSV
 TIKTOK_CSV_PATH = os.path.join(
     BASE_DIR,
+    CSV_DIR,
     "tiktok.csv"
 )
 
@@ -53,6 +56,7 @@ TIKTOK_CSV_PATH = os.path.join(
 # Reddit CSV
 REDDIT_CSV_PATH = os.path.join(
     BASE_DIR,
+    CSV_DIR,
     "reddit.csv"
 )
 
