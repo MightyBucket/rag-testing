@@ -35,6 +35,7 @@ def test_query_returns_empty_list_when_no_documents_match(helper_module):
                 k=5,
             )
 
+    # Make sure no documents were returned
     assert docs == []
     fake_vector_db.similarity_search.assert_called_once_with(
         "Find a vegan restaurant in Croydon",
